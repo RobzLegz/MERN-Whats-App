@@ -11,7 +11,7 @@ const Message = () => {
     )
 }
 const StyledMessage = styled.div`
-    min-height: 80px;
+    min-height: 60px;
     background: #fff;
     max-width: 300px;
     height: fit-content;

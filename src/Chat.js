@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import "./Chat.css";
 import SearchIcon from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import WhatsAppBackgroundImage from "./images/whatsappbgbgbggbg.jpg";
 import Message from './components/Message';
 import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
@@ -66,7 +65,7 @@ const StyledChatMessages = styled.div`
     width:100%;
     height: calc(100% - 120px);
     position: relative;
-    padding: 50px;
+    padding: 50px 20px;
 `;
 const StyledChatInput = styled.div`
     color:grey;
