@@ -29,7 +29,7 @@ const Sidebar = () => {
             <StyledSidebarSearch>
                 <form>
                     <SearchIcon />
-                    <input type="text"/>
+                    <input type="text" placeholder="Search or start a new chat"/>
                 </form>
             </StyledSidebarSearch>
             <StyledSidebarChats>
@@ -81,7 +81,16 @@ const StyledSidebarSearch = styled.div`
 `;
 const StyledSidebarChats = styled.div`
     width: 100%;
-    
+    overflow-y:scroll;
+    height:calc(100% - 110px);
+    ::-webkit-scrollbar{
+        width:5px;
+        background:none;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #999;
+        border-radius: 30px;
+    }
 `;
 
 export default Sidebar;
