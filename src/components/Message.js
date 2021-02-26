@@ -6,11 +6,35 @@ const Message = () => {
         <StyledMessage>
             <strong>sender name</strong>
             <p>This is a mesasge</p>
+            <small>12:19</small>
         </StyledMessage>
     )
 }
 const StyledMessage = styled.div`
-    z-index:10;
+    min-height: 80px;
+    background: #fff;
+    max-width: 300px;
+    height: fit-content;
+    padding: 5px 10px;
+    border-radius: 7px;
+    position: relative;
+    >strong{
+        font-size: 14px;
+        font-weight: 500;
+        color:#47D19F;
+    }
+    >p{
+        font-size: 14px;
+        padding: 5px;
+        color: #333;
+    }
+    >small{
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        color: #666;
+        font-size: 11px;
+    }
 `;
 
 export default Message
