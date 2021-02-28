@@ -1,6 +1,7 @@
 export const initialState = {
     user: null,
     roomId: null,
+    roomName: null,
 };
 
 export const reducer = (state, action) => {
@@ -14,6 +15,7 @@ export const reducer = (state, action) => {
             return{
                 ...state,
                 roomId: action.roomId,
+                roomName: action.roomName,
             };
         default:
             return{

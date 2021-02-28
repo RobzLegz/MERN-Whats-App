@@ -17,6 +17,7 @@ const Chat = () => {
 
     const [{user}, dispatch] = useStateValue();
     const [messages, setMessages] = useState([]);
+    const [{roomId, roomName}] = useStateValue();
     const [message, setMessage] = useState("");
 
     const sendMessage = (e) => {
@@ -37,7 +38,7 @@ const Chat = () => {
             <StyledChatHeader>
                 <div className="chat__header--right">
                     <Avatar />
-                    <p>Name of the group</p>
+                    <p>{roomName}</p>
                 </div>
                 <div className="chat__header--left">
                     <SearchIcon />
