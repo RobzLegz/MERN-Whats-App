@@ -12,6 +12,7 @@ const SidebarChat = ({groupName, groupIcon, groupId}) => {
             type: "ENTER_GROUP",
             roomId: groupId,
             roomName: groupName,
+            roomIcon: groupIcon,
         });
     }
 

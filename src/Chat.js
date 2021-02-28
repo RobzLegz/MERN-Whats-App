@@ -17,7 +17,7 @@ const Chat = () => {
 
     const [{user}, dispatch] = useStateValue();
     const [messages, setMessages] = useState([]);
-    const [{roomId, roomName}] = useStateValue();
+    const [{roomId, roomName,roomIcon}] = useStateValue();
     const [message, setMessage] = useState("");
 
     const sendMessage = (e) => {
@@ -34,28 +34,36 @@ const Chat = () => {
     
     return (
         <StyledChat>
-            <StyledChatHeader>
-                <div className="chat__header--right">
-                    <Avatar />
-                    <p>{roomName}</p>
-                </div>
-                <div className="chat__header--left">
-                    <SearchIcon />
-                    <MoreVertIcon />
-                </div>
-            </StyledChatHeader>
-            <StyledChatMessages>
-                <Message />
-            </StyledChatMessages>
-            <StyledChatInput>
-                <EmojiEmotionsOutlinedIcon />
-                <AttachFileOutlinedIcon />
-                <form>
-                    <input value={message} onChange={(e) => setMessage(e.target.value)} type="text" placeholder="Type a message"/>
-                    <button onClick={sendMessage} type="submit">send</button>
-                </form>
-                <MicIcon />
-            </StyledChatInput>
+            {roomId ? (
+                <>
+                    <StyledChatHeader>
+                        <div className="chat__header--right">
+                            <Avatar src={roomIcon} />
+                            <p>{roomName}</p>
+                        </div>
+                        <div className="chat__header--left">
+                            <SearchIcon />
+                            <MoreVertIcon />
+                        </div>
+                    </StyledChatHeader>
+                    <StyledChatMessages>
+                        <Message />
+                    </StyledChatMessages>
+                    <StyledChatInput>
+                        <EmojiEmotionsOutlinedIcon />
+                        <AttachFileOutlinedIcon />
+                        <form>
+                            <input value={message} onChange={(e) => setMessage(e.target.value)} type="text" placeholder="Type a message"/>
+                            <button onClick={sendMessage} type="submit">send</button>
+                        </form>
+                        <MicIcon />
+                    </StyledChatInput>
+                </>
+            ) : (
+                <StyledEmptyPage>
+                    <img src="https://cdn.24.co.za/files/Cms/General/d/2985/26346e94c14142cc81d07eb78c228ec8.png" alt=""/>
+                </StyledEmptyPage>
+            )}
         </StyledChat>
     )
 }
@@ -122,6 +130,18 @@ const StyledChatInput = styled.div`
         >button{
             display:none;
         }
+    }
+`;
+const StyledEmptyPage = styled.div`
+    width:100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background-color:#F7F9FA;
+    >img{
+        width:300px;
+        height:auto;
+        object-fit:contain;
     }
 `;
 
