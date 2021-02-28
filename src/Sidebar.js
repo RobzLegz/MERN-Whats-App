@@ -7,8 +7,25 @@ import SidebarChat from './SidebarChat';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import db from "./firebase";
 
 const Sidebar = () => {
+
+    const addGroup = () => {
+        const groupName = prompt("Please type your group name");
+        console.log(groupName);
+        if(groupName){
+            db.collection("groups").add({
+                groupName: groupName,
+                icon: "https://upload.wikimedia.org/wikipedia/en/4/4d/Shrek_%28character%29.png",
+            })
+        }else{
+            alert("Please enter a name for your group");
+            return;
+        }
+    }
+    
+
     return (
         <StyledSidebar>
             <StyledSidebarHeader>
@@ -33,6 +50,7 @@ const Sidebar = () => {
                     <input type="text" placeholder="Search or start a new chat"/>
                 </form>
                 <AddCircleIcon 
+                    onClick={addGroup}
                     style={{
                         fontSize: "30px", 
                         marginLeft: "10px", 
