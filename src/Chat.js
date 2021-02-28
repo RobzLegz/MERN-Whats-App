@@ -1,5 +1,5 @@
 import { Avatar } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import "./Chat.css";
 import SearchIcon from '@material-ui/icons/Search';
@@ -8,8 +8,30 @@ import Message from './components/Message';
 import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 import MicIcon from '@material-ui/icons/Mic';
+import useStateValue from './StateProvider';
+import { useParams } from 'react-router-dom';
+import db from './firebase';
+import firebase from "firebase";
 
 const Chat = () => {
+
+    const [{user}, dispatch] = useStateValue();
+    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState("");
+
+    const sendMessage = (e) => {
+        e.preventDefault();
+        if(message !== ""){
+            db.collection("rooms").doc().collection("messages").add({
+                name: user?.displayName,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                message: message,
+            })
+        }else{
+            return;
+        }
+    }
+    
     return (
         <StyledChat>
             <StyledChatHeader>
@@ -29,8 +51,8 @@ const Chat = () => {
                 <EmojiEmotionsOutlinedIcon />
                 <AttachFileOutlinedIcon />
                 <form>
-                    <input type="text" placeholder="Type a message"/>
-                    <button type="submit">send</button>
+                    <input value={message} onChange={(e) => setMessage(e.target.value)} type="text" placeholder="Type a message"/>
+                    <button onClick={sendMessage} type="submit">send</button>
                 </form>
                 <MicIcon />
             </StyledChatInput>

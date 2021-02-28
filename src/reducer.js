@@ -1,5 +1,6 @@
 export const initialState = {
     user: null,
+    roomId: null,
 };
 
 export const reducer = (state, action) => {
@@ -8,6 +9,11 @@ export const reducer = (state, action) => {
             return{
                 ...state,
                 user: action.user,
+            };
+        case "ENTER_GROUP":
+            return{
+                ...state,
+                roomId: action.roomId,
             };
         default:
             return{
