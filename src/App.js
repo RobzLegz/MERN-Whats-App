@@ -18,7 +18,8 @@ const StyledApp = styled.div`
   place-items: center;
   height: 100vh;
   width: 100%;
-  background-color: #dadbd3;
+  background: linear-gradient(to bottom, #009688, #dadbd3, #dadbd3, #dadbd3);
+  
 `;
 const StyledAppBody = styled.div`
   display: flex;

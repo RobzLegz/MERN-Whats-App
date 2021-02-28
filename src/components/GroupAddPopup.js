@@ -1,13 +1,34 @@
 import React from 'react'
 import styled from 'styled-components';
+import db from '../firebase';
 
-const GroupAddPopup = ({setGroupName, setGroupIcon, groupIcon, groupName}) => {
+const GroupAddPopup = ({setPopupState, setGroupName, setGroupIcon, groupIcon, groupName}) => {
+
+    const exitPopup = (e) => {
+        e.preventDefault();
+        setPopupState(false);
+    }
+
+    const submitRoomInfo = (e) => {
+        if (groupName){
+            db.collection("groups").add({
+                groupName: groupName,
+                groupIcon: groupIcon,
+            });
+            setGroupName("");
+            setGroupIcon("");
+            exitPopup(e);
+        }
+        return;        
+    }
+
     return (
         <StyledGroupPopup>
             <StyledInnerPopup>
-                <input type="text" placeholder="Name of your group"/>
-                <input type="url"placeholder="Group icon URL" />
-                <button type="submit">OK</button>
+                <input value={groupName} onChange={(e) => setGroupName(e.target.value)} required type="text" placeholder="Name of your group"/>
+                <input value={groupIcon} onChange={(e) => setGroupIcon(e.target.value)} type="url"placeholder="Group icon URL" />
+                <button onClick={submitRoomInfo} className="submit__button" type="submit">OK</button>
+                <button onClick={exitPopup} className="cancel__button">Cancel</button>
             </StyledInnerPopup>
         </StyledGroupPopup>
     )
@@ -21,6 +42,7 @@ const StyledGroupPopup = styled.div`
     background: rgba(0,0,0,0.3);
     top:0;
     left:0;
+    z-index: 100;
 `;
 const StyledInnerPopup = styled.form`
     width: 30%;
@@ -30,6 +52,7 @@ const StyledInnerPopup = styled.form`
     flex-direction: column;
     align-items:center;
     justify-content: center;
+    position: relative;
     >input{
         width: 80%;
         height: 40px;
@@ -38,7 +61,7 @@ const StyledInnerPopup = styled.form`
         font-size: 16px;
         padding: 0 10px;
     }
-    >button{
+    >.submit__button{
         width: 100px;
         height: 40px;
         background: #4BEC68;
@@ -49,6 +72,20 @@ const StyledInnerPopup = styled.form`
         outline: none;
         cursor: pointer;
     }
+    >.cancel__button{
+        width: 100px;
+        height: 40px;
+        background: #ec6035;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 900;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }   
 `;
 
 export default GroupAddPopup

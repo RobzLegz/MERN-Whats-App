@@ -30,7 +30,7 @@ const StyledSidebarChat = styled.div`
     display:flex;
     justify-content: space-between;
     padding: 0 20px;
-    height: 50px;
+    height: 70px;
     align-items: center;
     width: 100%;
     :hover{

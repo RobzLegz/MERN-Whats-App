@@ -19,6 +19,7 @@ const StyledMessage = styled.div`
     border-radius: 7px;
     position: relative;
     margin-bottom: 10px;
+    z-index: 0;
     >strong{
         font-size: 14px;
         font-weight: 500;

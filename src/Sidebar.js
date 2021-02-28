@@ -21,13 +21,6 @@ const Sidebar = () =>
 
     const addGroup = () => {
         setPopupState(true);
-        if (groupName){
-            db.collection("groups").add({
-                groupName: groupName,
-                groupIcon: groupIcon,
-            });
-        } else
-        return;
     }
 
     useEffect(() =>
@@ -89,6 +82,7 @@ const Sidebar = () =>
                     setGroupIcon={setGroupIcon} 
                     groupIcon={groupIcon}
                     groupName={groupName}
+                    setPopupState={setPopupState}
                 />
             }
         </StyledSidebar>
