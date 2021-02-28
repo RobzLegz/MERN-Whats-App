@@ -6,6 +6,7 @@ import { Avatar, IconButton } from '@material-ui/core';
 import SidebarChat from './SidebarChat';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const Sidebar = () => {
     return (
@@ -31,6 +32,14 @@ const Sidebar = () => {
                     <SearchIcon />
                     <input type="text" placeholder="Search or start a new chat"/>
                 </form>
+                <AddCircleIcon 
+                    style={{
+                        fontSize: "30px", 
+                        marginLeft: "10px", 
+                        color: "grey", 
+                        cursor: "pointer"
+                    }} 
+                />
             </StyledSidebarSearch>
             <StyledSidebarChats>
                 <SidebarChat />
