@@ -23,8 +23,7 @@ const Chat = () => {
     const sendMessage = (e) => {
         e.preventDefault();
         if(message !== ""){
-            db.collection("rooms").doc().collection("messages").add({
-                name: user?.displayName,
+            db.collection("groups").doc(roomId).collection("messages").add({
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 message: message,
             })
