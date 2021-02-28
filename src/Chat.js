@@ -30,6 +30,7 @@ const Chat = () => {
         }else{
             return;
         }
+        setMessage("");
     }
 
     useEffect(() => {

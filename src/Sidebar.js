@@ -17,10 +17,11 @@ const Sidebar = () =>
 
     const addGroup = () => {
         const groupName = prompt("Please type your group name");
+        const groupIcon = prompt("Please enter a link of your group image")
         if (groupName){
             db.collection("groups").add({
                 groupName: groupName,
-                groupIcon: "https://upload.wikimedia.org/wikipedia/en/4/4d/Shrek_%28character%29.png",
+                groupIcon: groupIcon,
             });
         } else
         return;
