@@ -5,8 +5,8 @@ const Message = ({messageText, messageTimestamp, id}) => {
     return (
         <StyledMessage>
             <strong>sender name</strong>
-            <p>This is a mesasge</p>
-            <small>12:19</small>
+            <p>{messageText}</p>
+            <small>{new Date(messageTimestamp?.toDate()).toLocaleTimeString()}</small>
         </StyledMessage>
     )
 }
@@ -18,6 +18,7 @@ const StyledMessage = styled.div`
     padding: 5px 10px;
     border-radius: 7px;
     position: relative;
+    margin-bottom: 10px;
     >strong{
         font-size: 14px;
         font-weight: 500;
