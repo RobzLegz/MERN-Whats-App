@@ -15,32 +15,26 @@ const Sidebar = () =>
 
     const [groups, setGroups] = useState([]);
 
-    const addGroup = () =>
-    {
+    const addGroup = () => {
         const groupName = prompt("Please type your group name");
-        console.log(groupName);
-        if (groupName)
-        {
+        if (groupName){
             db.collection("groups").add({
                 groupName: groupName,
-                icon: "https://upload.wikimedia.org/wikipedia/en/4/4d/Shrek_%28character%29.png",
-            })
+                groupIcon: "https://upload.wikimedia.org/wikipedia/en/4/4d/Shrek_%28character%29.png",
+            });
         } else
-        {
-            alert("Please enter a name for your group");
-            return;
-        }
+        return;
     }
 
     useEffect(() =>
     {
         db.collection("groups")?.onSnapshot((snapshot) => ((
-            snapshot?.docs?.map((doc) => ({
+            setGroups(snapshot?.docs?.map((doc) => ({
                 id: doc?.id,
                 data: doc?.data(),
-            }))
+            })))
         )));
-    }, []);
+    }, [groups]);
 
     return (
         <StyledSidebar>
@@ -79,9 +73,9 @@ const Sidebar = () =>
                 {groups?.map((sidebarGroup) => (
                     <SidebarChat
                         key={sidebarGroup?.id}
-                        id={sidebarGroup?.id}
-                        groupName={sidebarGroup?.groupName}
-                        groupIcon={sidebarGroup?.groupIcon}
+                        groupId={sidebarGroup?.id}
+                        groupName={sidebarGroup?.data.groupName}
+                        groupIcon={sidebarGroup?.data.groupIcon}
                     />
                 ))}
             </StyledSidebarChats>
