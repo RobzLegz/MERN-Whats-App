@@ -153,6 +153,7 @@ const StyledEmptyPage = styled.div`
         width:300px;
         height:auto;
         object-fit:contain;
+        pointer-events: none;
     }
 `;
 

@@ -9,15 +9,18 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import db from "./firebase";
 import { useEffect } from 'react';
+import GroupAddPopup from './components/GroupAddPopup';
 
 const Sidebar = () =>
 {
 
     const [groups, setGroups] = useState([]);
+    const [groupIcon, setGroupIcon] = useState("");
+    const [groupName, setGroupName] = useState("");
+    const [popupState, setPopupState] = useState(false);
 
     const addGroup = () => {
-        const groupName = prompt("Please type your group name");
-        const groupIcon = prompt("Please enter a link of your group image")
+        setPopupState(true);
         if (groupName){
             db.collection("groups").add({
                 groupName: groupName,
@@ -80,6 +83,14 @@ const Sidebar = () =>
                     />
                 ))}
             </StyledSidebarChats>
+            {popupState && 
+                <GroupAddPopup 
+                    setGroupName={setGroupName} 
+                    setGroupIcon={setGroupIcon} 
+                    groupIcon={groupIcon}
+                    groupName={groupName}
+                />
+            }
         </StyledSidebar>
     );
 }
