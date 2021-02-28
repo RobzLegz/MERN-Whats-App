@@ -10,25 +10,30 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import db from "./firebase";
 import { useEffect } from 'react';
 
-const Sidebar = () => {
+const Sidebar = () =>
+{
 
     const [groups, setGroups] = useState([]);
 
-    const addGroup = () => {
+    const addGroup = () =>
+    {
         const groupName = prompt("Please type your group name");
         console.log(groupName);
-        if(groupName){
+        if (groupName)
+        {
             db.collection("groups").add({
                 groupName: groupName,
                 icon: "https://upload.wikimedia.org/wikipedia/en/4/4d/Shrek_%28character%29.png",
             })
-        }else{
+        } else
+        {
             alert("Please enter a name for your group");
             return;
         }
     }
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         db.collection("groups")?.onSnapshot((snapshot) => ((
             snapshot?.docs?.map((doc) => ({
                 id: doc?.id,
@@ -41,7 +46,7 @@ const Sidebar = () => {
         <StyledSidebar>
             <StyledSidebarHeader>
                 <div className="sidebarHeaderLeft">
-                    <Avatar style={{cursor:"pointer"}} src="https://m.media-amazon.com/images/M/MV5BZDE2ZjIxYzUtZTJjYS00OWQ0LTk2NGEtMDliYmI3MzMwYjhkXkEyXkFqcGdeQWFsZWxvZw@@._V1_UX477_CR0,0,477,268_AL_.jpg" />
+                    <Avatar style={{ cursor: "pointer" }} src="https://m.media-amazon.com/images/M/MV5BZDE2ZjIxYzUtZTJjYS00OWQ0LTk2NGEtMDliYmI3MzMwYjhkXkEyXkFqcGdeQWFsZWxvZw@@._V1_UX477_CR0,0,477,268_AL_.jpg" />
                 </div>
                 <div className="sidebarHeadeerRight">
                     <IconButton>
@@ -58,25 +63,25 @@ const Sidebar = () => {
             <StyledSidebarSearch>
                 <form>
                     <SearchIcon />
-                    <input type="text" placeholder="Search or start a new chat"/>
+                    <input type="text" placeholder="Search or start a new chat" />
                 </form>
-                <AddCircleIcon 
+                <AddCircleIcon
                     onClick={addGroup}
                     style={{
-                        fontSize: "30px", 
-                        marginLeft: "10px", 
-                        color: "grey", 
+                        fontSize: "30px",
+                        marginLeft: "10px",
+                        color: "grey",
                         cursor: "pointer"
-                    }} 
+                    }}
                 />
             </StyledSidebarSearch>
             <StyledSidebarChats>
-                {groups.map((group) => (
+                {groups?.map((sidebarGroup) => (
                     <SidebarChat
-                        key={group.id}
-                        id={group.id}
-                        groupName={group.groupName}
-                        groupIcon={group.groupIcon}    
+                        key={sidebarGroup?.id}
+                        id={sidebarGroup?.id}
+                        groupName={sidebarGroup?.groupName}
+                        groupIcon={sidebarGroup?.groupIcon}
                     />
                 ))}
             </StyledSidebarChats>

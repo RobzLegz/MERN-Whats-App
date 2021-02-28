@@ -2,12 +2,12 @@ import { Avatar } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 
-const SidebarChat = () => {
+const SidebarChat = ({groupName, groupIcon, id}) => {
     return (
         <StyledSidebarChat>
             <Avatar />
             <div className="sidebar__chat--left">
-                <h4>Group Name</h4>
+                <h4>{groupName}</h4>
                 <p>Last message...</p>
             </div>
         </StyledSidebarChat>
