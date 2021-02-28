@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
@@ -8,8 +8,11 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import db from "./firebase";
+import { useEffect } from 'react';
 
 const Sidebar = () => {
+
+    const [groups, setGroups] = useState([]);
 
     const addGroup = () => {
         const groupName = prompt("Please type your group name");
@@ -24,7 +27,15 @@ const Sidebar = () => {
             return;
         }
     }
-    
+
+    useEffect(() => {
+        db.collection("groups")?.onSnapshot((snapshot) => ((
+            snapshot?.docs?.map((doc) => ({
+                id: doc?.id,
+                data: doc?.data(),
+            }))
+        )));
+    }, []);
 
     return (
         <StyledSidebar>
@@ -60,7 +71,14 @@ const Sidebar = () => {
                 />
             </StyledSidebarSearch>
             <StyledSidebarChats>
-                <SidebarChat />
+                {groups.map((group) => (
+                    <SidebarChat
+                        key={group.id}
+                        id={group.id}
+                        groupName={group.groupName}
+                        groupIcon={group.groupIcon}    
+                    />
+                ))}
             </StyledSidebarChats>
         </StyledSidebar>
     );
