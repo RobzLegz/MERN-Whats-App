@@ -1,5 +1,5 @@
 import { Avatar } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import "./Chat.css";
 import SearchIcon from '@material-ui/icons/Search';
@@ -31,6 +31,14 @@ const Chat = () => {
             return;
         }
     }
+
+    useEffect(() => {
+        if(roomId){
+            db.collection("groups").doc(roomId).collection("messages").orderBy("timestamp", "asc").onSnapshot((snapshot) => (
+                setMessages(snapshot.docs.map((doc) => doc.data()))
+            ))
+        }
+    }, [roomId])
     
     return (
         <StyledChat>
@@ -47,7 +55,9 @@ const Chat = () => {
                         </div>
                     </StyledChatHeader>
                     <StyledChatMessages>
-                        <Message />
+                        {messages.map((message) => (
+                            <Message key={message.id} id={message.id} messageText={message.message} messageTimestamp={message.timestamp} />
+                        ))}
                     </StyledChatMessages>
                     <StyledChatInput>
                         <EmojiEmotionsOutlinedIcon />

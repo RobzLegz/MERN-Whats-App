@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Message = () => {
+const Message = ({messageText, messageTimestamp, id}) => {
     return (
         <StyledMessage>
             <strong>sender name</strong>
