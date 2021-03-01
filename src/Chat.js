@@ -26,6 +26,7 @@ const Chat = () => {
             db.collection("groups").doc(roomId).collection("messages").add({
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 message: message,
+                name: user?.displayName,
             })
         }else{
             return;
@@ -57,7 +58,13 @@ const Chat = () => {
                     </StyledChatHeader>
                     <StyledChatMessages>
                         {messages.map((message) => (
-                            <Message key={message.id} id={message.id} messageText={message.message} messageTimestamp={message.timestamp} />
+                            <Message
+                                key={message.id}  
+                                id={message.id} 
+                                messageText={message.message} 
+                                messageTimestamp={message.timestamp} 
+                                userName={message.name}
+                            />
                         ))}
                     </StyledChatMessages>
                     <StyledChatInput>

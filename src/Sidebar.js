@@ -24,14 +24,6 @@ const Sidebar = () =>
         setPopupState(true);
     }
 
-    const signOut = () => {
-        dispatch({
-            type: "SIGN_OUT",
-            user: null,
-        });
-        auth.signOut();
-    };
-
     useEffect(() =>
     {
         db.collection("groups")?.onSnapshot((snapshot) => ((
@@ -46,7 +38,7 @@ const Sidebar = () =>
         <StyledSidebar>
             <StyledSidebarHeader>
                 <div className="sidebarHeaderLeft">
-                    <Avatar style={{ cursor: "pointer" }} onCLick={signOut} src={user?.photoURL} />
+                    <Avatar style={{ cursor: "pointer" }} src={user?.photoURL} />
                 </div>
                 <div className="sidebarHeadeerRight">
                     <IconButton>

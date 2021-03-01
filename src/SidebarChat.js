@@ -21,7 +21,6 @@ const SidebarChat = ({groupName, groupIcon, groupId}) => {
             <Avatar src={groupIcon} />
             <div className="sidebar__chat--left">
                 <h4>{groupName}</h4>
-                <p>Last message...</p>
             </div>
         </StyledSidebarChat>
     )
