@@ -30,7 +30,15 @@ const StyledApp = styled.div`
   height: 100vh;
   width: 100%;
   background: linear-gradient(to bottom, #009688, #dadbd3, #dadbd3, #dadbd3);
-  
+  @media(max-width: 1454px){
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top:0;
+    left:0;
+  }
 `;
 const StyledAppBody = styled.div`
   display: flex;
@@ -40,6 +48,12 @@ const StyledAppBody = styled.div`
   max-width: 70vw;
   margin-top: -50px;
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
+  @media(max-width: 1454px){
+    width: 100%;
+    max-width: 100vw;
+    height: 100%;
+    margin-top: 0;
+  }
 `;
 
 export default App;
