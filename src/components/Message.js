@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import useStateValue from '../StateProvider';
 
 const Message = ({messageText, messageTimestamp, id}) => {
     return (
         <StyledMessage>
-            <strong>sender name</strong>
+            <strong>skdl</strong>
             <p>{messageText}</p>
             <small>{new Date(messageTimestamp?.toDate()).toLocaleTimeString()}</small>
         </StyledMessage>

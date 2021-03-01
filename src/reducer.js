@@ -19,6 +19,11 @@ export const reducer = (state, action) => {
                 roomName: action.roomName,
                 roomIcon: action.roomIcon, 
             };
+        case "SIGN_OUT":
+            return{
+                ...state,
+                user: action.user,
+            };
         default:
             return{
                 ...state,

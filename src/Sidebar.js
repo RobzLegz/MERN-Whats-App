@@ -7,13 +7,14 @@ import SidebarChat from './SidebarChat';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import db from "./firebase";
+import db, { auth } from "./firebase";
 import { useEffect } from 'react';
 import GroupAddPopup from './components/GroupAddPopup';
+import useStateValue from './StateProvider';
 
 const Sidebar = () =>
 {
-
+    const [{user}, dispatch] = useStateValue();
     const [groups, setGroups] = useState([]);
     const [groupIcon, setGroupIcon] = useState("");
     const [groupName, setGroupName] = useState("");
@@ -22,6 +23,14 @@ const Sidebar = () =>
     const addGroup = () => {
         setPopupState(true);
     }
+
+    const signOut = () => {
+        dispatch({
+            type: "SIGN_OUT",
+            user: null,
+        });
+        auth.signOut();
+    };
 
     useEffect(() =>
     {
@@ -37,7 +46,7 @@ const Sidebar = () =>
         <StyledSidebar>
             <StyledSidebarHeader>
                 <div className="sidebarHeaderLeft">
-                    <Avatar style={{ cursor: "pointer" }} src="https://m.media-amazon.com/images/M/MV5BZDE2ZjIxYzUtZTJjYS00OWQ0LTk2NGEtMDliYmI3MzMwYjhkXkEyXkFqcGdeQWFsZWxvZw@@._V1_UX477_CR0,0,477,268_AL_.jpg" />
+                    <Avatar style={{ cursor: "pointer" }} onCLick={signOut} src={user?.photoURL} />
                 </div>
                 <div className="sidebarHeadeerRight">
                     <IconButton>

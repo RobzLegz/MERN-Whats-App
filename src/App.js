@@ -1,16 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import Chat from "./Chat";
+import LoginPage from "./pages/LoginPage";
 import Sidebar from "./Sidebar";
+import useStateValue from "./StateProvider";
 
 function App() {
+
+  const [{user}, dispatch] = useStateValue();
+
   return (
-    <StyledApp>
-      <StyledAppBody>
-        <Sidebar />
-        <Chat />
-      </StyledAppBody>     
-    </StyledApp>
+    <>
+      {!user ? (
+        <LoginPage />
+      ) : (
+        <StyledApp>
+          <StyledAppBody>
+            <Sidebar />
+            <Chat />
+          </StyledAppBody>     
+        </StyledApp>
+      )}
+    </>
   );
 }
 const StyledApp = styled.div`
